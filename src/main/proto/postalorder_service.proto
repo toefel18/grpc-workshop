@@ -1,0 +1,39 @@
+syntax = "proto3";
+package nl.toefel.postalorder;
+
+service PostalOrderService {
+    rpc CreateShipment (CreateShipmentRequest) returns (Shipment) {}
+}
+
+message CreateShipmentRequest {
+    ShipmentType type = 1;
+    repeated Parcel parcels = 2;
+}
+
+message CreateShipmentResponse {
+    Shipment shipment = 1;
+}
+
+message Shipment {
+    string shipmentId = 1;
+    ShipmentType type = 2;
+    repeated Parcel parcels = 3;
+}
+
+enum ShipmentType {
+    DELIVERY = 0;
+    PICKUP = 1;
+}
+
+message Parcel {
+    string id = 1;
+    Size size = 2;
+    int32 weigh_in_grams = 3;
+}
+
+message Size {
+    int32 length_cm = 1;
+    int32 width_cm = 2;
+    int32 height_cm = 3;
+}
+
