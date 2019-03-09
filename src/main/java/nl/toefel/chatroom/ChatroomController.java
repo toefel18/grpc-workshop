@@ -36,7 +36,7 @@ public class ChatroomController extends ChatroomGrpc.ChatroomImplBase {
         };
     }
 
-    private synchronized void broadcastMessage(ChatroomService.NewChat value) {
+    private void broadcastMessage(ChatroomService.NewChat value) {
         ChatroomService.Chat newMessage = ChatroomService.Chat.newBuilder()
                 .setName(value.getName())
                 .setMessage(value.getMessage())

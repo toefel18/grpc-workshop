@@ -1,8 +1,10 @@
 syntax = "proto3";
+
 package nl.toefel.postalorder;
 
 service PostalOrderService {
     rpc CreateShipment (CreateShipmentRequest) returns (Shipment) {}
+    rpc GetStatusUpdates (ShipmentStatusRequest) returns (stream ParcelStatus) {}
 }
 
 message CreateShipmentRequest {
@@ -14,8 +16,41 @@ message CreateShipmentResponse {
     Shipment shipment = 1;
 }
 
+message ShipmentStatusRequest {
+    string shipment_id = 1;
+    bool includeOld = 2;
+}
+
+message ParcelStatus {
+    string shipment_id = 1;
+    Status status = 2;
+
+    oneof details {
+        ProofOfDeliveryDetails delivery = 3;
+        OnTrainDetails train = 4;
+    }
+}
+
+enum Status {
+    CREATED = 0;
+    SORTED = 1;
+    ON_TRAIN = 2;
+    DELIVERED = 3;
+    REJECTED = 4;
+}
+
+message ProofOfDeliveryDetails {
+    string signedBy = 1;
+    bytes signature = 2;
+}
+
+message OnTrainDetails {
+    string train = 1;
+    string geolocation = 2;
+}
+
 message Shipment {
-    string shipmentId = 1;
+    string shipment_id = 1;
     ShipmentType type = 2;
     repeated Parcel parcels = 3;
 }

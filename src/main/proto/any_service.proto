@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package nl.toefel.postalorder;
+
+import "google/protobuf/any.proto";
+
+service AnyService {
+    rpc CallWithAny(Payload) returns (Payload) {}
+
+    rpc CallWithEither(Either) returns (Either) {}
+}
+
+message Payload {
+    google.protobuf.Any obj = 1;
+}
+
+message Either {
+    oneof Identifier {
+        string name = 1;
+        int32 ref = 2;
+    }
+}

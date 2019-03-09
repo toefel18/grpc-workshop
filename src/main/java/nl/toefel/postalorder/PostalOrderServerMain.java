@@ -8,6 +8,7 @@ import java.io.IOException;
 public class PostalOrderServerMain {
     public static void main(String[] args) throws IOException, InterruptedException {
         Server service = ServerBuilder.forPort(8081)
+                .intercept(new DurationInterceptor())
                 .addService(new PostalOrderController())
                 .build()
                 .start();

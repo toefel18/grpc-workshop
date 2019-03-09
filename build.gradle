@@ -39,6 +39,7 @@ dependencies {
     compile "io.grpc:grpc-stub:${grpcVersion}"
     compileOnly "javax.annotation:javax.annotation-api:1.2"
 
+
     compile "io.grpc:grpc-netty:${grpcVersion}"
     compile "io.netty:netty-tcnative-boringssl-static:${nettyTcNativeVersion}"
     compile "com.google.protobuf:protobuf-java-util:${protobufVersion}"
@@ -46,6 +47,9 @@ dependencies {
     testCompile "io.grpc:grpc-testing:${grpcVersion}"
     testCompile "junit:junit:4.12"
     testCompile "org.mockito:mockito-core:1.9.5"
+    
+    //geohashing lib
+    compile 'com.github.davidmoten:geo:0.7.1'
 }
 
 
@@ -86,6 +90,17 @@ sourceSets {
             srcDirs ;
         }
     }
+}
+
+task runChatroomServerUnsecure(type: JavaExec) {
+    main = "nl.toefel.chatroom.unsecure.UnsecureChatroomServerMain"
+    classpath = sourceSets.main.runtimeClasspath
+}
+
+task runChatroomClientUnsecure(type: JavaExec) {
+    main = "nl.toefel.chatroom.unsecure.UnsecureChatroomClientMain"
+    classpath = sourceSets.main.runtimeClasspath
+    standardInput = System.in
 }
 
 task fatJar(type: Jar) {

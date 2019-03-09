@@ -27,7 +27,7 @@ public class ChatroomCommandLineClient {
                 System.out.println("Completed");
             }
         });
-        System.out.println("");
+
         var scanner = new Scanner(System.in);
 
         while (true) {

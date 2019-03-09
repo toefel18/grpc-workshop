@@ -19,7 +19,7 @@ public class PostalOrderController extends PostalOrderServiceImplBase {
     public void createShipment(CreateShipmentRequest request, StreamObserver<Shipment> responseObserver) {
         var shipmentBuilder = Shipment.newBuilder()
                 .setShipmentId(UUID.randomUUID().toString())
-                .setType(PostalorderService.ShipmentType.PICKUP);
+                .setType(request.getType());
 
         // transform all parcels in the request
         for (PostalorderService.Parcel parcel : request.getParcelsList()) {

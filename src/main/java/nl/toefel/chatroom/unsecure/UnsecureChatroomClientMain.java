@@ -5,19 +5,18 @@ import io.grpc.ManagedChannelBuilder;
 import nl.toefel.chatroom.ChatroomCommandLineClient;
 
 import java.io.IOException;
+import java.util.Scanner;
 
 @SuppressWarnings("Duplicates")
 public class UnsecureChatroomClientMain {
-    public static void main(String[] args) throws InterruptedException, IOException {
+    public static void main(String[] args) {
         ManagedChannel channel = ManagedChannelBuilder
                 .forAddress("localhost", 8080)
                 .usePlaintext()
                 .build();
 
-        var nickname = "unknown";
-        if (args.length > 0) {
-            nickname = args[0];
-        }
+        System.out.print("Enter user name: ");
+        var nickname = new Scanner(System.in).nextLine();
 
         new ChatroomCommandLineClient().start(channel, nickname);
     }
