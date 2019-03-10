@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package nl.toefel.trains;
+
+service Prorail {
+    rpc GetTrackLayout (GetTrackLayoutRequest) returns (GetTrackLayoutResponse) {
+    }
+}
+
+
+message GetTrackLayoutRequest {
+    //empty but present for future reference
+}
+
+message GetTrackLayoutResponse {
+    int32 width = 1;
+    int32 height = 2;
+    repeated InfraComponent components = 3;
+}
+
+message InfraComponent {
+    int32 x = 1;
+    int32 y = 2;
+    string char = 3;
+}

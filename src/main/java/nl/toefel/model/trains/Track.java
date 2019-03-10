@@ -2,7 +2,6 @@ package nl.toefel.model.trains;
 
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * Example track:
@@ -32,6 +31,21 @@ public class Track {
             return ' ';
         }
         return line.charAt(pos.getX());
+    }
+
+    public SortedMap<Point, Character> infraElements() {
+        SortedMap<Point, Character> map = new TreeMap<>();
+        Point size = size();
+        for (int y = 0; y < size.getY(); y++) {
+            for (int x = 0; x < size.getX(); x++) {
+                Point pos = new Point(x, y);
+                char infraAt = infraElementAt(pos);
+                if (infraAt != ' ') {
+                    map.put(pos, infraAt);
+                }
+            }
+        }
+        return map;
     }
 
     public Point size() {
