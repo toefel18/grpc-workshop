@@ -17,3 +17,14 @@ Open the project in your favourite IDE
 cd build/libs
 java -cp grpc-chat-1.0-SNAPSHOT-all.jar nl.toefel.chatroom.unsecure.UnsecureChatroomClientMain <your name>
 ```
+
+#gprc web
+
+download 
+ proto, and proto-gen-grpc-web and place in path
+
+```
+cd /home/hestersco/Documents/projects/personal/grpc-workshop/front-end/src
+mkdir grpc
+protoc -I=../../src/main/proto train_service.proto --grpc-web_out=import_style=commonjs,mode=grpcwebtext:grpc
+```
