@@ -11,18 +11,23 @@ const {
   GetTrackLayoutRequest,
   GetTrackLayoutResponse
 } = require("./grpc/train_service_pb.js");
+
 const { ProrailClient } = require("./grpc/train_service_grpc_web_pb.js");
 
 const prorailClient = new ProrailClient("http://localhost:8083");
 const request = new GetTrackLayoutRequest();
 
-
 prorailClient.getTrackLayout(request, {}, function(err, resp) {
   if (err) {
     console.log("err", err);
   } else {
-    resp.
-    console.log("resp", resp);
+    console.log("height", resp.getHeight());
+    console.log("width", resp.getWidth());
+
+    const compontents = resp.getComponentsList();
+    compontents.forEach(c =>
+      console.log("pos ", c.getX(), c.getY(), " char = ", c.getChar())
+    );
   }
 });
 

@@ -7,13 +7,15 @@
 
 // GENERATED CODE -- DO NOT EDIT!
 
+
+
 const grpc = {};
-grpc.web = require("grpc-web");
+grpc.web = require('grpc-web');
 
 const proto = {};
 proto.nl = {};
 proto.nl.toefel = {};
-proto.nl.toefel.trains = require("./train_service_pb.js");
+proto.nl.toefel.trains = require('./train_service_pb.js');
 
 /**
  * @param {string} hostname
@@ -23,13 +25,10 @@ proto.nl.toefel.trains = require("./train_service_pb.js");
  * @struct
  * @final
  */
-proto.nl.toefel.trains.ProrailClient = function(
-  hostname,
-  credentials,
-  options
-) {
+proto.nl.toefel.trains.ProrailClient =
+    function(hostname, credentials, options) {
   if (!options) options = {};
-  options["format"] = "text";
+  options['format'] = 'text';
 
   /**
    * @private @const {!grpc.web.GrpcWebClientBase} The client
@@ -53,6 +52,7 @@ proto.nl.toefel.trains.ProrailClient = function(
   this.options_ = options;
 };
 
+
 /**
  * @param {string} hostname
  * @param {?Object} credentials
@@ -61,23 +61,19 @@ proto.nl.toefel.trains.ProrailClient = function(
  * @struct
  * @final
  */
-proto.nl.toefel.trains.ProrailPromiseClient = function(
-  hostname,
-  credentials,
-  options
-) {
+proto.nl.toefel.trains.ProrailPromiseClient =
+    function(hostname, credentials, options) {
   if (!options) options = {};
-  options["format"] = "text";
+  options['format'] = 'text';
 
   /**
    * @private @const {!proto.nl.toefel.trains.ProrailClient} The delegate callback based client
    */
   this.delegateClient_ = new proto.nl.toefel.trains.ProrailClient(
-    hostname,
-    credentials,
-    options
-  );
+      hostname, credentials, options);
+
 };
+
 
 /**
  * @const
@@ -94,6 +90,7 @@ const methodInfo_Prorail_GetTrackLayout = new grpc.web.AbstractClientBase.Method
   proto.nl.toefel.trains.GetTrackLayoutResponse.deserializeBinary
 );
 
+
 /**
  * @param {!proto.nl.toefel.trains.GetTrackLayoutRequest} request The
  *     request proto
@@ -104,19 +101,16 @@ const methodInfo_Prorail_GetTrackLayout = new grpc.web.AbstractClientBase.Method
  * @return {!grpc.web.ClientReadableStream<!proto.nl.toefel.trains.GetTrackLayoutResponse>|undefined}
  *     The XHR Node Readable Stream
  */
-proto.nl.toefel.trains.ProrailClient.prototype.getTrackLayout = function(
-  request,
-  metadata,
-  callback
-) {
-  return this.client_.rpcCall(
-    this.hostname_ + "/nl.toefel.trains.Prorail/GetTrackLayout",
-    request,
-    metadata,
-    methodInfo_Prorail_GetTrackLayout,
-    callback
-  );
+proto.nl.toefel.trains.ProrailClient.prototype.getTrackLayout =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/nl.toefel.trains.Prorail/GetTrackLayout',
+      request,
+      metadata,
+      methodInfo_Prorail_GetTrackLayout,
+      callback);
 };
+
 
 /**
  * @param {!proto.nl.toefel.trains.GetTrackLayoutRequest} request The
@@ -126,19 +120,16 @@ proto.nl.toefel.trains.ProrailClient.prototype.getTrackLayout = function(
  * @return {!Promise<!proto.nl.toefel.trains.GetTrackLayoutResponse>}
  *     The XHR Node Readable Stream
  */
-proto.nl.toefel.trains.ProrailPromiseClient.prototype.getTrackLayout = function(
-  request,
-  metadata
-) {
+proto.nl.toefel.trains.ProrailPromiseClient.prototype.getTrackLayout =
+    function(request, metadata) {
   return new Promise((resolve, reject) => {
     this.delegateClient_.getTrackLayout(
-      request,
-      metadata,
-      (error, response) => {
+      request, metadata, (error, response) => {
         error ? reject(error) : resolve(response);
-      }
-    );
+      });
   });
 };
 
+
 module.exports = proto.nl.toefel.trains;
+
