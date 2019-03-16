@@ -1,0 +1,34 @@
+{
+  "extends": [
+    "standard",
+    "plugin:react/recommended",
+    "prettier",
+    "prettier/react",
+    "prettier/standard",
+    "plugin:import/errors",
+    "plugin:import/warnings",
+    "plugin:jest/recommended"
+  ],
+  "plugins": ["react", "prettier", "standard", "import", "jest"],
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "env": {
+    "es6": true,
+    "jest/globals": true
+  },
+  "rules": {
+    "no-console": "warn",
+    "prettier/prettier": "error",
+    "react/prop-types": "off"
+  },
+  "settings": {
+    "react": {
+      "version": "16.8"
+    }
+  }
+}

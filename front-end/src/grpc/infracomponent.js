@@ -63,7 +63,8 @@ proto.nl.toefel.trains.InfraComponent.toObject = function(includeInstance, msg) 
   var f, obj = {
     x: jspb.Message.getFieldWithDefault(msg, 1, 0),
     y: jspb.Message.getFieldWithDefault(msg, 2, 0),
-    pb_char: jspb.Message.getFieldWithDefault(msg, 3, "")
+    pb_char: jspb.Message.getFieldWithDefault(msg, 3, ""),
+    turnType: jspb.Message.getFieldWithDefault(msg, 4, "")
   };
 
   if (includeInstance) {
@@ -111,6 +112,10 @@ proto.nl.toefel.trains.InfraComponent.deserializeBinaryFromReader = function(msg
     case 3:
       var value = /** @type {string} */ (reader.readString());
       msg.setChar(value);
+      break;
+    case 4:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setTurnType(value);
       break;
     default:
       reader.skipField();
@@ -162,6 +167,13 @@ proto.nl.toefel.trains.InfraComponent.serializeBinaryToWriter = function(message
       f
     );
   }
+  f = message.getTurnType();
+  if (f.length > 0) {
+    writer.writeString(
+      4,
+      f
+    );
+  }
 };
 
 
@@ -207,6 +219,21 @@ proto.nl.toefel.trains.InfraComponent.prototype.getChar = function() {
 /** @param {string} value */
 proto.nl.toefel.trains.InfraComponent.prototype.setChar = function(value) {
   jspb.Message.setProto3StringField(this, 3, value);
+};
+
+
+/**
+ * optional string turn_type = 4;
+ * @return {string}
+ */
+proto.nl.toefel.trains.InfraComponent.prototype.getTurnType = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 4, ""));
+};
+
+
+/** @param {string} value */
+proto.nl.toefel.trains.InfraComponent.prototype.setTurnType = function(value) {
+  jspb.Message.setProto3StringField(this, 4, value);
 };
 
 

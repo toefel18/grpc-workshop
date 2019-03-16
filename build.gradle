@@ -85,11 +85,11 @@ sourceSets {
             srcDirs 'build/generated/source/proto/main/java'
         }
     }
-    test {
-        java {
-            srcDirs ;
-        }
-    }
+//    test {
+//        java {
+//            srcDirs ;
+//        }
+//    }
 }
 
 task runChatroomServerUnsecure(type: JavaExec) {

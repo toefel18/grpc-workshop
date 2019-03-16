@@ -1,6 +1,5 @@
 package nl.toefel.postalorder;
 
-import com.google.protobuf.util.JsonFormat;
 import io.grpc.Status;
 import io.grpc.StatusRuntimeException;
 import io.grpc.inprocess.InProcessChannelBuilder;

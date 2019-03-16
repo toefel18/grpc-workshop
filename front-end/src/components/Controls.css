@@ -1,0 +1,22 @@
+.control-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-items: stretch;
+  grid-row-gap: 5px;
+  grid-column-gap: 3px;
+}
+
+.control-input {
+  height: 25px;
+  grid-column: 1;
+}
+
+.control-button {
+  height: 25px;
+  grid-column: 2;
+}
+
+input[type="text"] {
+  border: 1px solid gray;
+  border-radius: 5px;
+}

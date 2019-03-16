@@ -40,6 +40,8 @@ export class InfraComponent {
   setY(a: number): void;
   getChar(): string;
   setChar(a: string): void;
+  getTurnType(): string;
+  setTurnType(a: string): void;
   toObject(): InfraComponent.AsObject;
   serializeBinary(): Uint8Array;
   static deserializeBinary: (bytes: {}) => InfraComponent;
@@ -50,6 +52,7 @@ export namespace InfraComponent {
     X: number;
     Y: number;
     Char: string;
+    TurnType: string;
   }
 }
 
