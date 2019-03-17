@@ -131,5 +131,111 @@ proto.nl.toefel.trains.ProrailPromiseClient.prototype.getTrackLayout =
 };
 
 
+/**
+ * @const
+ * @type {!grpc.web.AbstractClientBase.MethodInfo<
+ *   !proto.nl.toefel.trains.AddTrainRequest,
+ *   !proto.nl.toefel.trains.AddTrainResponse>}
+ */
+const methodInfo_Prorail_AddTrain = new grpc.web.AbstractClientBase.MethodInfo(
+  proto.nl.toefel.trains.AddTrainResponse,
+  /** @param {!proto.nl.toefel.trains.AddTrainRequest} request */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.nl.toefel.trains.AddTrainResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.nl.toefel.trains.AddTrainRequest} request The
+ *     request proto
+ * @param {!Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.Error, ?proto.nl.toefel.trains.AddTrainResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.nl.toefel.trains.AddTrainResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.nl.toefel.trains.ProrailClient.prototype.addTrain =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/nl.toefel.trains.Prorail/AddTrain',
+      request,
+      metadata,
+      methodInfo_Prorail_AddTrain,
+      callback);
+};
+
+
+/**
+ * @param {!proto.nl.toefel.trains.AddTrainRequest} request The
+ *     request proto
+ * @param {!Object<string, string>} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.nl.toefel.trains.AddTrainResponse>}
+ *     The XHR Node Readable Stream
+ */
+proto.nl.toefel.trains.ProrailPromiseClient.prototype.addTrain =
+    function(request, metadata) {
+  return new Promise((resolve, reject) => {
+    this.delegateClient_.addTrain(
+      request, metadata, (error, response) => {
+        error ? reject(error) : resolve(response);
+      });
+  });
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.AbstractClientBase.MethodInfo<
+ *   !proto.nl.toefel.trains.GetTrainPositionsRequest,
+ *   !proto.nl.toefel.trains.TrainPositionUpdate>}
+ */
+const methodInfo_Prorail_GetPositionUpdates = new grpc.web.AbstractClientBase.MethodInfo(
+  proto.nl.toefel.trains.TrainPositionUpdate,
+  /** @param {!proto.nl.toefel.trains.GetTrainPositionsRequest} request */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.nl.toefel.trains.TrainPositionUpdate.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.nl.toefel.trains.GetTrainPositionsRequest} request The request proto
+ * @param {!Object<string, string>} metadata User defined
+ *     call metadata
+ * @return {!grpc.web.ClientReadableStream<!proto.nl.toefel.trains.TrainPositionUpdate>}
+ *     The XHR Node Readable Stream
+ */
+proto.nl.toefel.trains.ProrailClient.prototype.getPositionUpdates =
+    function(request, metadata) {
+  return this.client_.serverStreaming(this.hostname_ +
+      '/nl.toefel.trains.Prorail/GetPositionUpdates',
+      request,
+      metadata,
+      methodInfo_Prorail_GetPositionUpdates);
+};
+
+
+/**
+ * @param {!proto.nl.toefel.trains.GetTrainPositionsRequest} request The request proto
+ * @param {!Object<string, string>} metadata User defined
+ *     call metadata
+ * @return {!grpc.web.ClientReadableStream<!proto.nl.toefel.trains.TrainPositionUpdate>}
+ *     The XHR Node Readable Stream
+ */
+proto.nl.toefel.trains.ProrailPromiseClient.prototype.getPositionUpdates =
+    function(request, metadata) {
+  return this.delegateClient_.client_.serverStreaming(this.delegateClient_.hostname_ +
+      '/nl.toefel.trains.Prorail/GetPositionUpdates',
+      request,
+      metadata,
+      methodInfo_Prorail_GetPositionUpdates);
+};
+
+
 module.exports = proto.nl.toefel.trains;
 

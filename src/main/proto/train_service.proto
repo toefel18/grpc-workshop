@@ -5,6 +5,12 @@ package nl.toefel.trains;
 service Prorail {
     rpc GetTrackLayout (GetTrackLayoutRequest) returns (GetTrackLayoutResponse) {
     }
+
+    rpc AddTrain (AddTrainRequest) returns (AddTrainResponse) {
+    }
+
+    rpc GetPositionUpdates (GetTrainPositionsRequest) returns (stream TrainPositionUpdate) {
+    }
 }
 
 
@@ -23,4 +29,31 @@ message InfraComponent {
     int32 y = 2;
     string char = 3;
     string turn_type = 4;
+}
+
+message AddTrainRequest {
+    string train_id = 1;
+}
+
+message AddTrainResponse {
+    bool ok = 1;
+    string err = 2;
+}
+
+message GetTrainPositionsRequest {
+    string train_id = 1;
+}
+
+message TrainPositionUpdate {
+    string train_id = 1;
+    int32 x = 2;
+    int32 y = 3;
+    Direction direction = 4;
+}
+
+enum Direction {
+    TOP = 0;
+    RIGHT = 1;
+    BOTTOM = 2;
+    LEFT = 3;
 }

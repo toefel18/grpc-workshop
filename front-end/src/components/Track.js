@@ -1,6 +1,5 @@
 import React from "react"
-import { Stage, Layer, Line, Image } from "react-konva"
-import Konva from "konva"
+import { Stage, Layer, Image, Text } from "react-konva"
 import horizontalTrackUrl from "./horizontal.jpg"
 import verticalTrackUrl from "./vertical.jpg"
 import intersectionTrackUrl from "./intersection.jpg"
@@ -27,7 +26,7 @@ turns["top-to-right"].src = topToRightTrackUrl
 turns["top-to-left"] = new window.Image()
 turns["top-to-left"].src = topToLeftTrackUrl
 
-const Track = ({ track }) => {
+const Track = ({ track, trains }) => {
   const scale = 36
   if (!track) {
     return <div>No track received yet...</div>
@@ -43,9 +42,21 @@ const Track = ({ track }) => {
           {track.getComponentsList().map(c => {
             const x = c.getX() * scale
             const y = c.getY() * scale
-            console.log(c)
             const image = ~"/\\".indexOf(c.getChar()) ? turns[c.getTurnType()] : simpleDirections[c.getChar()]
             return <Image key={`${x}${y}`} x={x} y={y} width={scale} height={scale} image={image} />
+          })}
+
+          {Object.keys(trains).map(trainName => {
+            const pos = trains[trainName]
+            return (
+              <Text
+                key={pos.getTrainId}
+                x={pos.getX() * scale}
+                y={pos.getY() * scale}
+                fontSize={30}
+                text={pos.getTrainId()}
+              />
+            )
           })}
         </Layer>
       </Stage>

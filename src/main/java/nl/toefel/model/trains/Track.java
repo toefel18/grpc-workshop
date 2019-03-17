@@ -68,13 +68,18 @@ public class Track {
         trains.forEach(t -> System.out.println(t.getName() + " has pos " + t.getPos()));
     }
 
-    public void addTrain(Train train){
+    public boolean addTrain(Train train){
         if (!trains.contains(train)) {
-            trains.add(train);
+            return trains.add(train);
         }
+        return false;
     }
 
     public void moveTrains() {
         trains.forEach(train -> train.getOperator().moveTrainToNewPosition(train, this));
+    }
+
+    public List<Train> getTrains() {
+        return trains;
     }
 }
