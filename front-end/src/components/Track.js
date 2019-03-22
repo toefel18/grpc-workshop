@@ -1,5 +1,5 @@
 import React from "react"
-import { Stage, Layer, Image, Text } from "react-konva"
+import { Stage, Layer, Image, Group, Text } from "react-konva"
 import horizontalTrackUrl from "./horizontal.jpg"
 import verticalTrackUrl from "./vertical.jpg"
 import intersectionTrackUrl from "./intersection.jpg"
@@ -7,6 +7,7 @@ import bottomToLeftTrackUrl from "./bottom-to-left.jpg"
 import bottomToRightTrackUrl from "./bottom-to-right.jpg"
 import topToLeftTrackUrl from "./top-to-left.jpg"
 import topToRightTrackUrl from "./top-to-right.jpg"
+import trainUrl from "./train.jpg"
 
 const simpleDirections = {}
 simpleDirections["|"] = new window.Image()
@@ -25,6 +26,9 @@ turns["top-to-right"] = new window.Image()
 turns["top-to-right"].src = topToRightTrackUrl
 turns["top-to-left"] = new window.Image()
 turns["top-to-left"].src = topToLeftTrackUrl
+
+const trainImage = new window.Image()
+trainImage.src = trainUrl
 
 const Track = ({ track, trains }) => {
   const scale = 36
@@ -47,15 +51,32 @@ const Track = ({ track, trains }) => {
           })}
 
           {Object.keys(trains).map(trainName => {
-            const pos = trains[trainName]
+            const currentTrain = trains[trainName]
+            console.log(trainImage)
             return (
-              <Text
-                key={pos.getTrainId}
-                x={pos.getX() * scale}
-                y={pos.getY() * scale}
-                fontSize={30}
-                text={pos.getTrainId()}
-              />
+              // offsetX is required for rotating with center as origin
+              // direction is 0 for TOP, 1 for RIGHT, etc..
+              <Group key={`train-img${currentTrain.getTrainId()}`}>
+                <Image
+                  x={currentTrain.getX() * scale + scale / 2}
+                  y={currentTrain.getY() * scale + scale / 2}
+                  offsetX={scale / 2}
+                  offsetY={scale / 2}
+                  width={scale}
+                  height={scale}
+                  rotation={90 * currentTrain.getDirection()}
+                  image={trainImage}
+                />
+                <Text
+                  key={currentTrain.getTrainId}
+                  x={currentTrain.getX() * scale}
+                  y={currentTrain.getY() * scale + scale / 2}
+                  fontSize={15}
+                  stroke={"red"}
+                  strokeWidth={1}
+                  text={currentTrain.getTrainId()}
+                />
+              </Group>
             )
           })}
         </Layer>

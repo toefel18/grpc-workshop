@@ -22,10 +22,10 @@ repositories {
     mavenLocal()
 }
 
-def grpcVersion = '1.17.0'
-def nettyTcNativeVersion = '2.0.7.Final'
-def protobufVersion = '3.5.1'
-def protocVersion = '3.5.1-1'
+def grpcVersion = '1.19.0'
+def nettyTcNativeVersion = '2.0.22.Final'
+def protobufVersion = '3.7.0'
+def protocVersion = '3.7.0'
 
 group 'nl.toefel'
 version '1.0-SNAPSHOT'
@@ -99,6 +99,12 @@ task runChatroomServerUnsecure(type: JavaExec) {
 
 task runChatroomClientUnsecure(type: JavaExec) {
     main = "nl.toefel.chatroom.unsecure.UnsecureChatroomClientMain"
+    classpath = sourceSets.main.runtimeClasspath
+    standardInput = System.in
+}
+
+task runTrainTrack(type: JavaExec) {
+    main = "nl.toefel.model.trains.TrainMain"
     classpath = sourceSets.main.runtimeClasspath
     standardInput = System.in
 }

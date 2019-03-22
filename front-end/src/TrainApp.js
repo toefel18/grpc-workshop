@@ -5,20 +5,6 @@ import "./TrainApp.css"
 import { GetTrackLayoutRequest, AddTrainRequest, GetTrainPositionsRequest } from "./grpc/train_service_pb"
 const { ProrailClient } = require("./grpc/train_service_grpc_web_pb.js")
 
-// const { GetTrackLayoutRequest, GetTrackLayoutResponse } = require("./grpc/train_service_pb.js")
-// const request = new GetTrackLayoutRequest()
-// prorailClient.getTrackLayout(request, {}, function(err, resp) {
-//   if (err) {
-//     console.log("err", err)
-//   } else {
-//     console.log("height", resp.getHeight())
-//     console.log("width", resp.getWidth())
-
-//     const compontents = resp.getComponentsList()
-//     compontents.forEach(c => console.log("pos ", c.getX(), c.getY(), " char = ", c.getChar()))
-//   }
-// })
-
 const TrainApp = props => {
   const prorailClient = new ProrailClient("http://localhost:8083")
   const [error, setError] = useState()
@@ -29,7 +15,7 @@ const TrainApp = props => {
     prorailClient.getTrackLayout(new GetTrackLayoutRequest(), {}, function(err, response) {
       if (err) {
         console.log(err)
-        setError(`grpc error: ${err}`)
+        setError(`grpc error: ${JSON.stringify(err)}`)
       } else {
         setTrack(response)
       }
@@ -43,7 +29,7 @@ const TrainApp = props => {
     prorailClient.addTrain(addTrainRequest, {}, function(err, response) {
       if (err) {
         console.log(err)
-        setError(`grpc error: ${err}`)
+        setError(`grpc error: ${JSON.stringify(err)}`)
       } else {
         if (response.getOk()) {
           window.alert(`Train with id ${trainId} added`)
@@ -59,7 +45,6 @@ const TrainApp = props => {
     request.setTrainId(trainId)
     const stream = prorailClient.getPositionUpdates(request, {})
     stream.on("data", function(response) {
-      console.log("Position Update", response)
       setTrains(currentTrains => {
         return { ...currentTrains, [response.getTrainId()]: response }
       })
@@ -76,6 +61,9 @@ const TrainApp = props => {
         delete updatedTrains[trainId]
         return updatedTrains
       })
+    })
+    stream.on("error", function(err) {
+      setError(`grpc error: ${JSON.stringify(err)}`)
     })
   }
 

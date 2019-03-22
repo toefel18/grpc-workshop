@@ -10,7 +10,7 @@ public class TrainMain {
         List<String> lines = Resource.asLines("/train-track.txt");
         Track track = new Track(lines);
         Train train = new Train("toefel", new RandomTrainOperator());
-        train.setPos(new Point(9,3));
+        train.setPos(new Point(9, 3));
         train.setDirection(Direction.BOTTOM);
         track.addTrain(train);
         while (true) {
