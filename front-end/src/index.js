@@ -1,7 +1,7 @@
 import React from "react"
 import ReactDOM from "react-dom"
 import "./index.css"
-import TrainApp from "./TrainApp"
+import TrainApp from "./module/TrainApp"
 import * as serviceWorker from "./serviceWorker"
 
 ReactDOM.render(<TrainApp />, document.getElementById("root"))

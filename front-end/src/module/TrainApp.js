@@ -1,12 +1,18 @@
 import React, { useState } from "react"
-import Controls from "./components/Controls"
-import Track from "./components/Track"
+import Controls from "../components/Controls"
+import Track from "../components/Track"
 import "./TrainApp.css"
-import { GetTrackLayoutRequest, AddTrainRequest, GetTrainPositionsRequest } from "./grpc/prorail_service_pb"
-const { ProrailClient } = require("./grpc/prorail_service_grpc_web_pb.js")
+import {
+  GetTrackLayoutRequest,
+  CreateTrainRequest,
+  GetTrainPositionsRequest,
+  PassengerTrain,
+} from "../grpc/prorail_service_pb"
+const { ProrailClient } = require("../grpc/prorail_service_grpc_web_pb.js")
 
 const TrainApp = props => {
   const prorailClient = new ProrailClient("http://localhost:8083")
+
   const [error, setError] = useState()
   const [track, setTrack] = useState()
   const [trains, setTrains] = useState({})
@@ -25,18 +31,20 @@ const TrainApp = props => {
   }
 
   const addTrain = trainId => {
-    const addTrainRequest = new AddTrainRequest()
-    addTrainRequest.setTrainId(trainId)
-    prorailClient.addTrain(addTrainRequest, {}, function(err, response) {
+    const train = new PassengerTrain()
+    train.setTrainId(trainId)
+    train.setWeightInKg(85)
+    train.setMaxCapacity(66)
+
+    const createTrainRequest = new CreateTrainRequest()
+    createTrainRequest.setPassengertrain(train)
+
+    prorailClient.createTrain(createTrainRequest, {}, function(err, response) {
       if (err) {
         console.log(err)
         setError(`grpc error: ${JSON.stringify(err)}`)
       } else {
-        if (response.getOk()) {
-          window.alert(`Train with id ${trainId} added`)
-        } else {
-          window.alert(`Train with id ${trainId} could not be added because: ${response.getErr()}`)
-        }
+        window.alert(`Train with id ${trainId} added, response: ${response}` )
       }
     })
   }
@@ -66,6 +74,8 @@ const TrainApp = props => {
     stream.on("error", function(err) {
       setError(`grpc error: ${JSON.stringify(err)}`)
     })
+
+    //stream.cancel() to stop receiving position updates
   }
 
   return (

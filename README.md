@@ -5,6 +5,8 @@
  each package below `nl.toefel` contains an example. For example `nl.toefel.chatroom`
  
  Runnable classes end with Main.
+ 
+ 
 
 ## Getting started
 
@@ -15,7 +17,7 @@ Open the project in your favourite IDE
 ```bash
 ./gradlew fatJar
 cd build/libs
-java -cp grpc-chat-1.0-SNAPSHOT-all.jar nl.toefel.chatroom.unsecure.UnsecureChatroomClientMain <your name>
+java -cp grpc-chat-1.0-SNAPSHOT-all.jar nl.toefel.chatroom.unsecure.UnsecureChatroomClientMain <your trainId>
 ```
 
 #gprc web

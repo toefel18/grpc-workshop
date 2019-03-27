@@ -5,12 +5,14 @@ mkdir -p src/grpc
 
 OUT_DIR=src/grpc
 INCLUDE_PATH=../src/main/proto
+PROTOS_TO_PROCESS="prorail_service.proto postalorder_service.proto"
+
 
 echo "clearing $OUT_DIR/*"
 rm -rf $OUT_DIR/*
 
 # generate normal JS files
-protoc -I=$INCLUDE_PATH train_service.proto \
+protoc -I=$INCLUDE_PATH $(ls $INCLUDE_PATH) \
  --grpc-web_out=import_style=commonjs+dts,mode=grpcwebtext:$OUT_DIR \
  --js_out=import_style=commonjs:$OUT_DIR
 

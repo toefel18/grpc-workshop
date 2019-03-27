@@ -28,7 +28,7 @@ public class ProrailController extends ProrailGrpc.ProrailImplBase {
     private final ScheduledExecutorService executor = Executors.newScheduledThreadPool(4);
     private SetMultimap<String, StreamObserver<TrainPositionUpdate>> trainObservers = HashMultimap.create();
 
-    // in memory storage, maps trainId -> train
+    // maps trainId -> train
     private LinkedHashMap<String, PassengerTrain> trains = new LinkedHashMap<>();
 
     public ProrailController(Track track) {
@@ -94,7 +94,7 @@ public class ProrailController extends ProrailGrpc.ProrailImplBase {
             e.printStackTrace();
         }
     }
-    
+
     @Override
     public void getPositionUpdates(GetTrainPositionsRequest request, StreamObserver<TrainPositionUpdate> responseObserver) {
         if (!track.getTrains().stream().anyMatch(t -> t.getTrainId().equalsIgnoreCase(request.getTrainId()))) {
