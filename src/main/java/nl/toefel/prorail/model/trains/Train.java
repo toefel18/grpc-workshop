@@ -2,13 +2,17 @@ package nl.toefel.prorail.model.trains;
 
 public class Train {
 
-    private final String name;
+    private final String trainId;
     private Point pos;
     private Direction direction;
     private TrainOperator operator;
 
-    public Train(String name, TrainOperator operator) {
-        this.name = name;
+    public Train(String trainId) {
+        this(trainId, new RandomTrainOperator());
+    }
+
+    public Train(String trainId, TrainOperator operator) {
+        this.trainId = trainId;
         this.operator = operator;
     }
 
@@ -16,8 +20,8 @@ public class Train {
         this.pos = pos;
     }
 
-    public String getName() {
-        return name;
+    public String getTrainId() {
+        return trainId;
     }
 
     public Point getPos() {

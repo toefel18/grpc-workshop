@@ -25,7 +25,6 @@ public class Track {
 
     public Track(List<String> infra) {
         this.infra = infra;
-
     }
 
     public char infraElementAt(Point pos) {
@@ -68,10 +67,16 @@ public class Track {
         System.out.print(ANSI_CLS + ANSI_HOME);
         System.out.flush();
         grid.forEach(row -> System.out.println(new String(row)));
-        trains.forEach(t -> System.out.println(t.getName() + " has pos " + t.getPos()));
+        trains.forEach(t -> System.out.println(t.getTrainId() + " has pos " + t.getPos()));
     }
 
     public boolean addTrain(Train train){
+        if (train.getPos() == null) {
+            train.setPos(new Point(9, 3));
+        }
+        if (train.getDirection() == null) {
+            train.setDirection(Direction.BOTTOM);
+        }
         if (!trains.contains(train)) {
             return trains.add(train);
         }
@@ -84,5 +89,9 @@ public class Track {
 
     public List<Train> getTrains() {
         return trains;
+    }
+
+    public void removeTrain(String trainId) {
+        trains = trains.stream().filter(t -> !trainId.equals(t.getTrainId())).collect(Collectors.toList());
     }
 }

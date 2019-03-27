@@ -2,8 +2,8 @@ import React, { useState } from "react"
 import Controls from "./components/Controls"
 import Track from "./components/Track"
 import "./TrainApp.css"
-import { GetTrackLayoutRequest, AddTrainRequest, GetTrainPositionsRequest } from "./grpc/train_service_pb"
-const { ProrailClient } = require("./grpc/train_service_grpc_web_pb.js")
+import { GetTrackLayoutRequest, AddTrainRequest, GetTrainPositionsRequest } from "./grpc/prorail_service_pb"
+const { ProrailClient } = require("./grpc/prorail_service_grpc_web_pb.js")
 
 const TrainApp = props => {
   const prorailClient = new ProrailClient("http://localhost:8083")

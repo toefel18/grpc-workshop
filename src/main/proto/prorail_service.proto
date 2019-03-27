@@ -1,0 +1,98 @@
+syntax = "proto3";
+
+package nl.toefel.trains;
+
+service Prorail {
+    rpc GetTrackLayout (GetTrackLayoutRequest) returns (GetTrackLayoutResponse) {
+    }
+
+    rpc GetPositionUpdates (GetTrainPositionsRequest) returns (stream TrainPositionUpdate) {
+    }
+
+    rpc CreateTrain (CreateTrainRequest) returns (CreateTrainResponse) {
+    }
+
+    rpc GetTrain (GetTrainRequest) returns (GetTrainResponse) {
+    }
+
+    rpc DeleteTrain (DeleteTrainRequest) returns (DeleteTrainResponse) {
+    }
+
+    rpc ListTrains (ListTrainsRequest) returns (stream PassengerTrain) {
+    }
+
+}
+
+message GetTrackLayoutRequest {
+    //empty but present for future reference
+}
+
+message GetTrackLayoutResponse {
+    int32 width = 1;
+    int32 height = 2;
+    repeated InfraComponent components = 3;
+}
+
+message InfraComponent {
+    int32 x = 1;
+    int32 y = 2;
+    string char = 3; // can be one of / \ | - +
+    string turn_type = 4; // can be bottom-to-left, bottom-to-right, top-to-left or top-to-right
+}
+
+message CreateTrainRequest {
+    PassengerTrain passengerTrain = 1;
+}
+
+message CreateTrainResponse {
+    string train_id = 1;
+}
+
+message PassengerTrain {
+    string train_id = 1;
+    int32 max_capacity = 2;
+    int32 weight_in_kg = 3;
+}
+
+message GetTrainRequest {
+    string train_id = 1;
+}
+
+message GetTrainResponse {
+    PassengerTrain train = 1;
+}
+
+message DeleteTrainRequest {
+    string train_id = 1;
+}
+
+message DeleteTrainResponse {
+    bool success = 1;
+    bool train_existed = 2;
+}
+
+message ListTrainsRequest {
+    // empty
+}
+
+message ListTrainsResponse {
+    repeated PassengerTrain trains = 1;
+}
+
+message GetTrainPositionsRequest {
+    string train_id = 1;
+}
+
+message TrainPositionUpdate {
+    string train_id = 1;
+    int32 x = 2;
+    int32 y = 3;
+    Direction direction = 4;
+}
+
+enum Direction {
+    TOP = 0;
+    RIGHT = 1;
+    BOTTOM = 2;
+    LEFT = 3;
+}

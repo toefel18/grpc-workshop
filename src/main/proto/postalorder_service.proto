@@ -40,7 +40,7 @@ enum Status {
 }
 
 message ProofOfDeliveryDetails {
-    string signedBy = 1;
+    string signed_by = 1;
     bytes signature = 2;
 }
 
