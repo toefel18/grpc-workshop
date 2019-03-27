@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package nl.toefel.simple;
+
+service SimpleService {
+    rpc ExampleCall (SimpleRequest) returns (SimpleResponse) {}
+}
+
+message SimpleRequest {
+    int32 some_number = 1;
+    map<string, string> attributes = 2;
+}
+
+message SimpleResponse {
+    string result = 1;
+    SimpleRequest original_request = 2;
+}

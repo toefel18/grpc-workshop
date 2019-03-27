@@ -1,4 +1,4 @@
-package nl.toefel.model.trains;
+package nl.toefel.prorail.model.trains;
 
 import java.util.ArrayList;
 import java.util.Arrays;

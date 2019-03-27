@@ -1,4 +1,4 @@
-package nl.toefel.model.trains;
+package nl.toefel.prorail.model.trains;
 
 public class Train {
 

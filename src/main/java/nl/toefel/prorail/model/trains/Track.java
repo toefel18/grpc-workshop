@@ -1,6 +1,9 @@
-package nl.toefel.model.trains;
+package nl.toefel.prorail.model.trains;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.SortedMap;
+import java.util.TreeMap;
 import java.util.stream.Collectors;
 
 /**

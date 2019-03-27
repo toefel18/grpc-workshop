@@ -2,18 +2,10 @@ package nl.toefel.chatroom.tls;
 
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
-import io.grpc.stub.StreamObserver;
 import nl.toefel.chatroom.ChatroomController;
-import nl.toefel.chatroom.ChatroomGrpc;
-import nl.toefel.chatroom.ChatroomService;
 
 import java.io.File;
 import java.io.IOException;
-import java.time.LocalTime;
-import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 /**
  * See README.md for certificate generation instructions

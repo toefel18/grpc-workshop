@@ -1,6 +1,6 @@
 package nl.toefel.util;
 
-import nl.toefel.model.trains.TrainMain;
+import nl.toefel.prorail.model.trains.TrainMain;
 
 import java.io.BufferedReader;
 import java.io.IOException;

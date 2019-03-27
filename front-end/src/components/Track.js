@@ -1,13 +1,13 @@
 import React from "react"
 import { Stage, Layer, Image, Group, Text } from "react-konva"
-import horizontalTrackUrl from "./horizontal.jpg"
-import verticalTrackUrl from "./vertical.jpg"
-import intersectionTrackUrl from "./intersection.jpg"
-import bottomToLeftTrackUrl from "./bottom-to-left.jpg"
-import bottomToRightTrackUrl from "./bottom-to-right.jpg"
-import topToLeftTrackUrl from "./top-to-left.jpg"
-import topToRightTrackUrl from "./top-to-right.jpg"
-import trainUrl from "./train.jpg"
+import horizontalTrackUrl from "./img/horizontal.jpg"
+import verticalTrackUrl from "./img/vertical.jpg"
+import intersectionTrackUrl from "./img/intersection.jpg"
+import bottomToLeftTrackUrl from "./img/bottom-to-left.jpg"
+import bottomToRightTrackUrl from "./img/bottom-to-right.jpg"
+import topToLeftTrackUrl from "./img/top-to-left.jpg"
+import topToRightTrackUrl from "./img/top-to-right.jpg"
+import trainUrl from "./img/train.jpg"
 
 const simpleDirections = {}
 simpleDirections["|"] = new window.Image()

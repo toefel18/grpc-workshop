@@ -1,5 +1,6 @@
 package nl.toefel.chatroom;
 
+import io.grpc.Context;
 import io.grpc.stub.StreamObserver;
 
 import java.time.LocalTime;
@@ -7,6 +8,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.Executors;
 
 @SuppressWarnings("ALL")
 public class ChatroomController extends ChatroomGrpc.ChatroomImplBase {
@@ -16,9 +18,19 @@ public class ChatroomController extends ChatroomGrpc.ChatroomImplBase {
     @Override
     public StreamObserver<ChatroomService.NewChat> openChat(StreamObserver<ChatroomService.Chat> responseObserver) {
         clients.add(responseObserver);
+
+        Context.current().addListener(new Context.CancellationListener() {
+            @Override
+            public void cancelled(Context context) {
+                System.out.println("Cancelled ");
+                clients.remove(responseObserver);
+            }
+        }, Executors.newSingleThreadExecutor());
+
         return new StreamObserver<>() {
             @Override
             public void onNext(ChatroomService.NewChat value) {
+                System.out.println("Received " + value);
                 broadcastMessage(value);
             }
 
@@ -45,7 +57,7 @@ public class ChatroomController extends ChatroomGrpc.ChatroomImplBase {
 
         var clientsCopy = new ArrayList<>(clients);
 
-        for (StreamObserver<ChatroomService.Chat> observer: clientsCopy) {
+        for (StreamObserver<ChatroomService.Chat> observer : clientsCopy) {
             try {
                 observer.onNext(newMessage);
             } catch (Throwable t) {

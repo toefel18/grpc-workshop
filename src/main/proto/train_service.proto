@@ -4,12 +4,15 @@ package nl.toefel.trains;
 
 service Prorail {
     rpc GetTrackLayout (GetTrackLayoutRequest) returns (GetTrackLayoutResponse) {
+
     }
 
     rpc AddTrain (AddTrainRequest) returns (AddTrainResponse) {
+
     }
 
     rpc GetPositionUpdates (GetTrainPositionsRequest) returns (stream TrainPositionUpdate) {
+
     }
 }
 

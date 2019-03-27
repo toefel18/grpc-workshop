@@ -4,51 +4,51 @@ import com.google.protobuf.Any;
 import com.google.protobuf.util.JsonFormat;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
+import nl.toefel.any.AnyServiceGrpc;
+import nl.toefel.any.AnyServiceOuterClass.Payload;
 import nl.toefel.chatroom.ChatroomService;
-import nl.toefel.postalorder.AnyServiceGrpc;
-import nl.toefel.postalorder.AnyServiceOuterClass;
 
 import java.io.IOException;
-import java.util.concurrent.TimeUnit;
 
 @SuppressWarnings("Duplicates")
 public class AnyClientMain {
     public static void main(String[] args) throws IOException {
         ManagedChannel channel = ManagedChannelBuilder
-                .forAddress("localhost", 8082)
+                .forAddress("localhost", 9901)
                 .usePlaintext()
                 .build();
 
-        var anyOneOfService = AnyServiceGrpc.newBlockingStub(channel)
-                .withDeadlineAfter(1000, TimeUnit.MILLISECONDS);
 
-        var payload = AnyServiceOuterClass.Payload.newBuilder()
+        var client = AnyServiceGrpc.newBlockingStub(channel);
+
+        // we use the chatroom chat DTO and pack it into an any field
+        var payload = Payload.newBuilder()
                 .setObj(Any.pack(ChatroomService.Chat.newBuilder()
                         .setMessage("Hallo")
                         .setName("Chefke")
                         .build()))
                 .build();
 
-        var returned = anyOneOfService.callWithAny(payload);
-        System.out.println(returned);
+        // the server will just echo the object we send it
+        var response = client.callWithAny(payload);
+
+        System.out.println("Protobuf representation");
+        System.out.println(response);
+
+        // If you want to print this as JSON, you need to provide a type registry including the type contained in any.
+        System.out.println("JSON representation");
+        JsonFormat.TypeRegistry typeRegistry = JsonFormat.TypeRegistry.newBuilder().add(ChatroomService.Chat.getDescriptor()).build();
+        System.out.println(JsonFormat.printer().usingTypeRegistry(typeRegistry).print(response));
 
         // get type url
-        var type = returned.getObj().getTypeUrl().split("/")[1]; //typeUrl = type.googleapis.com/nl.toefel.chatroom.Chat
+        var type = response.getObj().getTypeUrl().split("/")[1]; //typeUrl = type.googleapis.com/nl.toefel.chatroom.Chat
+
+        System.out.println("any type = " + type);
 
         // unpack anyoneof type
-        if (returned.getObj().is(ChatroomService.Chat.class)) {
-            var unpackedChat = returned.getObj().unpack(ChatroomService.Chat.class);
+        if (response.getObj().is(ChatroomService.Chat.class)) {
+            var unpackedChat = response.getObj().unpack(ChatroomService.Chat.class);
             System.out.println("We received a chat: " + unpackedChat.getName() + " " + unpackedChat.getMessage());
         }
-
-        var either = AnyServiceOuterClass.Either.newBuilder()
-                .setName("baas b")
-                .setRef(1234) // cancels out name due to oneOf~!
-                .build();
-
-        var resp = anyOneOfService.callWithEither(either);
-
-        System.out.println("`" + resp.getName() + "`"); // will be empty
-        System.out.println(JsonFormat.printer().print(resp));
     }
 }

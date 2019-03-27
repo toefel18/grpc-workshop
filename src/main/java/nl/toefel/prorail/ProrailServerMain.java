@@ -2,7 +2,7 @@ package nl.toefel.prorail;
 
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
-import nl.toefel.model.trains.Track;
+import nl.toefel.prorail.model.trains.Track;
 import nl.toefel.util.Resource;
 
 import java.io.IOException;

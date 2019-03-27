@@ -37,6 +37,8 @@ dependencies {
     compile "io.grpc:grpc-netty-shaded:${grpcVersion}"
     compile "io.grpc:grpc-protobuf:${grpcVersion}"
     compile "io.grpc:grpc-stub:${grpcVersion}"
+    compile "io.grpc:grpc-all:${grpcVersion}"
+    compile "me.dinowernli:java-grpc-prometheus:0.3.0"
     compileOnly "javax.annotation:javax.annotation-api:1.2"
 
 

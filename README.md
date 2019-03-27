@@ -13,7 +13,7 @@ Open the project in your favourite IDE
  * run `./gradlew idea` or `./gradlew eclipse` to configure your IDE to detect the generated code directories.
      
 ```bash
-./gradlew fatjar
+./gradlew fatJar
 cd build/libs
 java -cp grpc-chat-1.0-SNAPSHOT-all.jar nl.toefel.chatroom.unsecure.UnsecureChatroomClientMain <your name>
 ```

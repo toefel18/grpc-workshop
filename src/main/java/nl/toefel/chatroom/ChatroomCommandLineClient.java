@@ -8,8 +8,8 @@ import java.util.Scanner;
 public class ChatroomCommandLineClient {
 
     public void start(ManagedChannel channel, String nickname) {
-
         var stub = ChatroomGrpc.newStub(channel);
+
         var chatStream = stub.openChat(new StreamObserver<>() {
             @Override
             public void onNext(ChatroomService.Chat value) {

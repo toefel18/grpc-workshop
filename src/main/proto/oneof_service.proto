@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package nl.toefel.oneof;
+
+service OneOfService {
+    rpc CallWithEither(Either) returns (Either) {}
+}
+
+message Either {
+    oneof Identifier {
+        string name = 1;
+        int32 ref = 2;
+    }
+}

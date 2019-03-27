@@ -23,6 +23,7 @@ const TrainApp = props => {
 
     // prorailClient.getTrackLayout actually returns a request that can be used to cancel the call or register event listeners.
   }
+
   const addTrain = trainId => {
     const addTrainRequest = new AddTrainRequest()
     addTrainRequest.setTrainId(trainId)
@@ -70,7 +71,7 @@ const TrainApp = props => {
   return (
     <div>
       <div className={"error-box"} style={{ display: error ? "block" : "none" }}>
-        Error: {error}
+        Error: {error} <button onClick={() => setError("")}>Clear error</button>
       </div>
       <div className={"container"}>
         <div className={"controls"}>

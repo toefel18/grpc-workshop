@@ -4,7 +4,7 @@ import com.google.common.collect.HashMultimap;
 import com.google.common.collect.SetMultimap;
 import io.grpc.Status;
 import io.grpc.stub.StreamObserver;
-import nl.toefel.model.trains.*;
+import nl.toefel.prorail.model.trains.*;
 import nl.toefel.trains.ProrailGrpc;
 import nl.toefel.trains.TrainService;
 
