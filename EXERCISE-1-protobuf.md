@@ -20,7 +20,7 @@ For info on types etc: [Protobuf 3 docs](https://developers.google.com/protocol-
     
 1. Run `./gradlew generateProto`
 
-1. Create a java class `nl.toefel.exercise1.Excercise1` with a main function.
+1. Create a java class `nl.toefel.exercise1.Exercise1` with a main function.
 
 1. Create an instance of HotelBooking using the builder, set all fields.
 
