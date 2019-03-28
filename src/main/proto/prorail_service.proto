@@ -9,18 +9,7 @@ service Prorail {
     rpc GetPositionUpdates (GetTrainPositionsRequest) returns (stream TrainPositionUpdate) {
     }
 
-    rpc CreateTrain (CreateTrainRequest) returns (CreateTrainResponse) {
-    }
-
-    rpc GetTrain (GetTrainRequest) returns (GetTrainResponse) {
-    }
-
-    rpc DeleteTrain (DeleteTrainRequest) returns (DeleteTrainResponse) {
-    }
-
-    rpc ListTrains (ListTrainsRequest) returns (stream PassengerTrain) {
-    }
-
+    // Implement CreatTrain etc..
 }
 
 message GetTrackLayoutRequest {
@@ -38,45 +27,6 @@ message InfraComponent {
     int32 y = 2;
     string char = 3; // can be one of / \ | - +
     string turn_type = 4; // can be bottom-to-left, bottom-to-right, top-to-left or top-to-right
-}
-
-message CreateTrainRequest {
-    PassengerTrain passengerTrain = 1;
-}
-
-message CreateTrainResponse {
-    string train_id = 1;
-}
-
-message PassengerTrain {
-    string train_id = 1;
-    int32 max_capacity = 2;
-    int32 weight_in_kg = 3;
-}
-
-message GetTrainRequest {
-    string train_id = 1;
-}
-
-message GetTrainResponse {
-    PassengerTrain train = 1;
-}
-
-message DeleteTrainRequest {
-    string train_id = 1;
-}
-
-message DeleteTrainResponse {
-    bool success = 1;
-    bool train_existed = 2;
-}
-
-message ListTrainsRequest {
-    // empty
-}
-
-message ListTrainsResponse {
-    repeated PassengerTrain trains = 1;
 }
 
 message GetTrainPositionsRequest {

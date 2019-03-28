@@ -7,11 +7,9 @@ import io.grpc.stub.StreamObserver;
 import nl.toefel.prorail.model.trains.Direction;
 import nl.toefel.prorail.model.trains.Point;
 import nl.toefel.prorail.model.trains.Track;
-import nl.toefel.prorail.model.trains.Train;
 import nl.toefel.trains.ProrailGrpc;
 import nl.toefel.trains.ProrailService;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.Set;
@@ -28,63 +26,13 @@ public class ProrailController extends ProrailGrpc.ProrailImplBase {
     private final ScheduledExecutorService executor = Executors.newScheduledThreadPool(4);
     private SetMultimap<String, StreamObserver<TrainPositionUpdate>> trainObservers = HashMultimap.create();
 
-    // maps trainId -> train
-    private LinkedHashMap<String, PassengerTrain> trains = new LinkedHashMap<>();
+    // maps trainId -> train //Change object to PassengerTrain
+    private LinkedHashMap<String, Object> trains = new LinkedHashMap<>();
 
     public ProrailController(Track track) {
         this.track = track;
         // should not really be here, but for the sake of the example.
         executor.scheduleAtFixedRate(this::moveTrains, 0, 500, TimeUnit.MILLISECONDS);
-    }
-
-    @Override
-    public void createTrain(CreateTrainRequest request, StreamObserver<CreateTrainResponse> responseObserver) {
-        var passengerTrain = request.getPassengerTrain();
-        if (passengerTrain == null) {
-            responseObserver.onError(Status.INVALID_ARGUMENT.augmentDescription("no passenger train in message").asException());
-        } else if (trains.containsKey(passengerTrain.getTrainId())) {
-            responseObserver.onError(Status.ALREADY_EXISTS.asException());
-        } else {
-            trains.put(passengerTrain.getTrainId(), passengerTrain);
-            // add it to the track, the track will track will update it's position
-            track.addTrain(new Train(passengerTrain.getTrainId()));
-
-            responseObserver.onNext(CreateTrainResponse.newBuilder().setTrainId(passengerTrain.getTrainId()).build());
-            responseObserver.onCompleted();
-        }
-    }
-
-    @Override
-    public void getTrain(GetTrainRequest request, StreamObserver<GetTrainResponse> responseObserver) {
-        PassengerTrain passengerTrain = trains.get(request.getTrainId());
-        if (passengerTrain == null) {
-            responseObserver.onError(Status.NOT_FOUND.asException());
-        } else {
-            responseObserver.onNext(GetTrainResponse.newBuilder().setTrain(passengerTrain).build());
-            responseObserver.onCompleted();
-        }
-    }
-
-    @Override
-    public void deleteTrain(DeleteTrainRequest request, StreamObserver<DeleteTrainResponse> responseObserver) {
-        PassengerTrain removedTrain = trains.remove(request.getTrainId());
-        track.removeTrain(request.getTrainId());
-        responseObserver.onNext(DeleteTrainResponse.newBuilder()
-                .setSuccess(true)
-                .setTrainExisted(removedTrain != null)
-                .build());
-        responseObserver.onCompleted();
-    }
-
-    @Override
-    public void listTrains(ListTrainsRequest request, StreamObserver<PassengerTrain> responseObserver) {
-        ArrayList<PassengerTrain> trainsCopy = new ArrayList(trains.values());
-        trainsCopy.forEach(train -> {
-            // simulate slow connection
-            sleepSafe(1000);
-            responseObserver.onNext(train);
-        });
-        responseObserver.onCompleted();
     }
 
     private void sleepSafe(int millis) {

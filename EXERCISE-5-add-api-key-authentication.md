@@ -8,6 +8,7 @@ Tutorial gRPC: [Tutorial GRPC](https://grpc.io/docs/tutorials/basic/java.html)
    you can use `AcceptLanguageServerInterceptor.java` for inspiration. If the api is not set or does not match
    `koekkoek`, the call should fail with satus UNAUTHENTICATED.
    
-1. Add the api key to the stub, you can use: use MetadataUtils or CallCredentials. Pick your poison.
+1. Add the api key to the stub, you can use: use MetadataUtils or CallCredentials. Pick your poison. 
+   Use AttachHeadersClient. for inspiration
 
 1. Test it.  
