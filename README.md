@@ -24,27 +24,6 @@ java -cp build/libs/grpc-chat-1.0-SNAPSHOT-all.jar nl.toefel.chatroom.unsecure.U
 
 ```
      
-## gRPC-web requirements
-
-When using java, gradle downloads the protobuf compiler for us, when using grpc-web
-we need to invoke the compiler (protoc) ourselves to generate code.
-1. Download the protobuf compiler (protoc) from the [protobuf releases page](https://github.com/protocolbuffers/protobuf/releases/tag/v3.7.0). 
-Choose the version for your platform, most mac users would need `protoc-3.7.0-osx-x86_64.zip`
-2. Extract the archive and place the protoc executable somewhere in your path (and make sure you have execution rights `chmod +x protoc`)
-3. Download protoc-gen-grpc-web from [grpc-web releases page](https://github.com/grpc/grpc-web/releases/tag/1.0.4), choose your platform
- and also place it in your path. Make sure to rename it 'protoc-gen-grpc-web'
-
-You should now be able to generate javascript sources from the *.proto files in src/main/proto
-
-```bash
-cd front-end
-./generate-proto.sh
-npm install #to fetch all deps
-```
-
-Run `./generate-proto.sh` every time you changed the .proto files
-
-
 #Excercises
 
  * [Exercise 1 - protobuf](EXERCISE-1-protobuf.md)

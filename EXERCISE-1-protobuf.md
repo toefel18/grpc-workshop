@@ -54,3 +54,4 @@ For info on types etc: [Protobuf 3 docs](https://developers.google.com/protocol-
 1. Now read the file "hotel-booking-2.binary" from disk again using the old message 
    definition and print it. The output should look different now.
 
+1. Now print the hotel booking as JSON using JsonFormat

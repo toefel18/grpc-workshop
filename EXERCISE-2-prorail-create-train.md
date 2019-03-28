@@ -1,10 +1,9 @@
-# Exercise 2 - Prorail
+# Exercise 2 - Prorail Create Train
 
 For info on types etc: [Protobuf 3 docs](https://developers.google.com/protocol-buffers/docs/proto3)
 Quickstart gRPC: [Quickstart GRPC](https://grpc.io/docs/quickstart/java.html)
 Tutorial gRPC: [Tutorial GRPC](https://grpc.io/docs/tutorials/basic/java.html)
 
-## Part 1
 1. Use the docs or code samples for inspiration
 
 1. Open `prorail_service.proto` and add an RPC method `CreateTrain`, it should have
@@ -26,9 +25,7 @@ Tutorial gRPC: [Tutorial GRPC](https://grpc.io/docs/tutorials/basic/java.html)
     ``` 
     
     The track will update the position of the train, required for the react app stream.
-    
-
-     
+         
 1. Add some error handling, if the the train already exists, it should call onError. 
    Use the Status class to generate the exception (Status.<TYPE>.asException())
    
@@ -37,13 +34,10 @@ Tutorial gRPC: [Tutorial GRPC](https://grpc.io/docs/tutorials/basic/java.html)
    
     * Wrap the call in a try-catch block and use Status.fromThrowable to extract info.
     
-# Part 2
-1. Implement GetTrain, and DeleteTrain in the same way.
+At this point, all the preliminaries are ready for [Excercise 3 - grpc-web](EXERCISE-3-grpc-web.md)
 
-1. Then implement ListTrain, which should receive an empty Request and return a stream.
-    
-    * Add a server-side streaming RPC to the prorail_service.proto
-    * Implement the server, which publishes all the trains on the responseObserver and 
-      sleeps 1000ms between each publish. 
-    * Implement the client and print the incoming stream.
-    
+## Unit test
+
+1. Create a unit test, use PostalOrderControllerTest.java as inspiration
+
+Next, if you want to skip grpc-web, goto [Exercise 4 - prorail-list-trains](EXERCISE-4-prorail-list-trains.md)
