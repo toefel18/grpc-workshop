@@ -30,7 +30,7 @@ java -cp build/libs/grpc-chat-1.0-SNAPSHOT-all.jar nl.toefel.chatroom.unsecure.U
  * [EXERCISE-2-prorail-create-train.md](EXERCISE-2-prorail-create-train.md)
  * [EXERCISE-3-grpc-web.md](EXERCISE-3-grpc-web.md)
  * [EXERCISE-4-prorail-list-trains.md](EXERCISE-4-prorail-list-trains.md)
- * [EXERCISE-5-add-api-key-authentication.md](EXERCISE-5-add-api-key-authentication.md)
+ * [EXERCISE-5-add-api-key-authentication.md](EXERCISE-5-interceptors.md)
  * [EXERCISE-6-transcoding-to-http.md](EXERCISE-6-transcoding-to-http.md)
 
  

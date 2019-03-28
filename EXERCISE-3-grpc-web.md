@@ -81,6 +81,6 @@ When you see this log line, envoy is ready:
 1. Keep track of open streams, add a button to cancel an active stream. 
 
 1. Implement api key security, this should also be configured on the grpc-backend, and possibly also in envoy. This is 
-   an extension on [Exercise 5 - add-api-key-authentication](EXERCISE-5-add-api-key-authentication.md)
+   an extension on [Exercise 5 - add-api-key-authentication](EXERCISE-5-interceptors.md)
       
    
