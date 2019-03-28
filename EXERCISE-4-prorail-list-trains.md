@@ -14,4 +14,14 @@ Tutorial gRPC: [Tutorial GRPC](https://grpc.io/docs/tutorials/basic/java.html)
       sleeps 1000ms between each publish to simulate slow streaming. 
       
 1. Implement the client and print the incoming streamed trains, one by one.
+
+
+# Bonus exercise - Bi-directional streaming: 
+
+1. Implement 'ListTrainsPaged' which receives stream of ListTrainsPageRequest and returns a stream of PassengerTrains.
+
+1. The client should send a request, the server should then send a response with 2 trains, the client can then send 
+   another request on which the server responds again. When the server is out of trains, it should call onCompleted.  
+   
+ 
     

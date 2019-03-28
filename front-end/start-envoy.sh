@@ -12,6 +12,9 @@ ENVOY_LISTEN_PORT=${ENVOY_LISTEN_PORT:-8083}
 echo "Configuring envoy to target grpc backend at ${IP_ADDRESS}:${GRPC_PORT} while listening at ${ENVOY_LISTEN_PORT}"
 echo "use env vars IP_ADDRESS, GRPC_PORT and ENVOY_LISTEN_PORT to override"
 
+echo "starting container..."
+sleep 2
+
 IP_ADDRESS=${IP_ADDRESS} GRPC_PORT=${GRPC_PORT:-8082} ENVOY_LISTEN_PORT=${ENVOY_LISTEN_PORT} envsubst < envoy-config-template.yaml > envoy.yaml
 
 docker run -it --rm --name grpw-web-envoy-${ENVOY_LISTEN_PORT} \
