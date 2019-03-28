@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package nl.toefel.scratch;
+
+message HotelBooking {
+    string arrival_date = 1;
+    string departure_date = 2;
+    double price = 3;
+    repeated Guest guests = 4;
+}
+
+message Guest {
+    string name = 1;
+    int32 age = 2;
+    Gender gender = 3;
+}
+
+enum Gender {
+    MALE = 0;
+    FEMALE = 1;
+    FLUID = 2;
+}
+
